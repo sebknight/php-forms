@@ -41,8 +41,8 @@
       // $emailMessage = 'You have received an email <br> Here it is: <br> ' += $message;
       $emailMessage += $message;
       $headers = array(
-        'From' => 'sebastianknightmaddox@gmail.com',
-        'Reply-To' => 'sebastianknightmaddox@gmail.com',
+        'From' => 'email@email.com',
+        'Reply-To' => 'email@email.com',
         'X-Mailer' => 'PHP/'.phpversion()
       );
       mail($to, $subject, $emailMessage, $headers);
