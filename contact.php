@@ -36,7 +36,17 @@
     }
 
     if (empty($errors)) {
-      var_dump("All good");
+      $to = $email;
+      $subject = 'email enquiry';
+      // $emailMessage = 'You have received an email <br> Here it is: <br> ' += $message;
+      $emailMessage += $message;
+      $headers = array(
+        'From' => 'sebastianknightmaddox@gmail.com',
+        'Reply-To' => 'sebastianknightmaddox@gmail.com',
+        'X-Mailer' => 'PHP/'.phpversion()
+      );
+      mail($to, $subject, $emailMessage, $headers);
+      header('Location:index.php');
     } 
       // die();
   }
