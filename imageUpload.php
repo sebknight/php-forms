@@ -1,4 +1,10 @@
 <?php 
+    // include composer autoload
+    require 'vendor/autoload.php';
+    // import the Intervention Image Manager Class
+    use Intervention\Image\ImageManager;
+
+
     //outputs php info
     // phpinfo();
     //die();
@@ -31,17 +37,45 @@
             array_push($errors, "Incorrect file type - please upload a jpg or png");
         }
         
-        $destination = "images/uploads";
-        //Check if destination exists and make it if it doesn't
-        if (!is_dir($destination)){
-            //needs / on end to ensure it's not a file, 0777 is default with widest access
-            mkdir("images/uploads/", 0777, true);
+        if (empty($errors)){
+            $destination = "images/uploads";
+            //Check if destination exists and make it if it doesn't
+            if (!is_dir($destination)) {
+                //needs / on end to ensure it's not a file, 0777 is default with widest access
+                mkdir("images/uploads/", 0777, true);
+            }
+
+            //give the uploaded file a new unique name
+            $newFilename = uniqid() . "." . $fileExt;
+            //put it in the uploads folder - commented out as is throwing imagemanager errors
+            // move_uploaded_file($fileTmp, $destination . "/.$newFilename");
+
+            //requires the image intervention
+            $manager = new ImageManager();
+
+            //rewrite to stop file not found error
+            $mainImage = $manager->make($fileTmp);
+            $mainImage->save($destination."/".$newFilename, 100);
+
+            //Create thumbnail folder if it doesn't exist
+            $thumbnailDestination = "images/uploads/thumbnails";
+            if (!is_dir($thumbnailDestination)){
+                mkdir("images/uploads/thumbnails/", 0777, true);
+            }
+
+            //make thumbnailImagr from fileTmp
+            $thumbnailImage = $manager->make($fileTmp);
+            //resize image but prevent upsizing, and keep aspect ratio
+            $thumbnailImage->resize(null, 400, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            });
+            //save thumbnail image in the destination with a new filename, and set quality
+            $thumbnailImage->save($thumbnailDestination."/".$newFilename, 100);
+
+
         }
 
-        //give the uploaded file a new unique name
-        $newFilename = uniqid() .".". $fileExt;
-        //put it in the uploads folder
-        move_uploaded_file($fileTmp, $destination."/.$newFilename");
         // die();
 
     } else {
