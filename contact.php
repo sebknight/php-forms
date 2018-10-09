@@ -1,5 +1,5 @@
 <?php
-  if($_POST){
+if ($_POST) {
     // var_dump($_POST["name"]);
     // $name = $_POST["name"];
     // $email = $_POST["email"];
@@ -13,18 +13,18 @@
     $errors = array();
 
     //validation - must be in logical order
-    if(!$name){
-      array_push($errors, 'Please enter a name');
-    } else if(strlen($name) < 2){
-      array_push($errors, 'Please enter at least two characters for your name');
-    } else if(strlen($name) > 100){
-      array_push($errors, 'Your name cannot be more than 100 characters');
-    } 
+    if (!$name) {
+        array_push($errors, 'Please enter a name');
+    } else if (strlen($name) < 2) {
+        array_push($errors, 'Please enter at least two characters for your name');
+    } else if (strlen($name) > 100) {
+        array_push($errors, 'Your name cannot be more than 100 characters');
+    }
 
     if (!$email) {
-        array_push($errors, 'Please enter an email');
-    }  else if (!filter_var($email, FILTER_VALIDATE_EMAIL)){
-        array_push($errors, 'Please enter a valid email');
+        array_push($errors, 'Please enter an email address');
+    } else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        array_push($errors, 'Please enter a valid email address');
     }
 
     if (!$message) {
@@ -36,25 +36,26 @@
     }
 
     if (empty($errors)) {
-      $to = $email;
-      $subject = 'email enquiry';
-      // $emailMessage = 'You have received an email <br> Here it is: <br> ' += $message;
-      $emailMessage += $message;
-      $headers = array(
-        'From' => 'email@email.com',
-        'Reply-To' => 'email@email.com',
-        'X-Mailer' => 'PHP/'.phpversion()
-      );
-      mail($to, $subject, $emailMessage, $headers);
-      header('Location:index.php');
-    } 
-      // die();
-  }
+        $to = $email;
+        $subject = 'email enquiry';
+        // $emailMessage = 'You have received an email <br> Here it is: <br> ' += $message;
+        $emailMessage += $message;
+        $headers = array(
+            //These are dummy email addresses
+            'From' => 'email@email.com',
+            'Reply-To' => 'email@email.com',
+            'X-Mailer' => 'PHP/' . phpversion(),
+        );
+        mail($to, $subject, $emailMessage, $headers);
+        header('Location:index.php');
+    }
+    // die();
+}
 
-    $page = "contact";
-    require "templates/meta.php";
-    include("templates/header.php");
-    ?>
+$page = "contact";
+require "templates/meta.php";
+include "templates/header.php";
+?>
     <div class="site-wrapper">
 
       <div class="site-wrapper-inner">
@@ -64,18 +65,18 @@
             <h1 class="cover-heading">How to contact us</h1>
             <p class="lead">Don't.</p>
             <?php
-              if($_POST && !empty($errors)): ?>
+if ($_POST && !empty($errors)): ?>
                 <div class="alert alert-danger" role="alert">
                   <ul>
-                    <?php foreach($errors as $singleError): ?>
-                      <li><?= $singleError; ?></li>
-                    <?php endforeach; ?>
+                    <?php foreach ($errors as $singleError): ?>
+                      <li><?=$singleError;?></li>
+                    <?php endforeach;?>
                   </ul>
                 </div>
-            <?php endif; ?>
-            
+            <?php endif;?>
+
             <?php
-                if ($_POST && empty($errors)): ?>
+if ($_POST && empty($errors)): ?>
                 <div class="alert alert-success" role="alert">
                   <ul>
                       <li><?="Form submitted successfully";?></li>
@@ -87,15 +88,15 @@
             <form method="post" action="contact.php" enctype="multipart/form-data">
               <div class="form-group">
                   <label for="name">Name</label>
-                  <input type="text" class="form-control" name="name" placeholder="Enter name" value="<?php if(isset($_POST['name'])) { echo $_POST['name']; } ?>">
+                  <input type="text" class="form-control" name="name" placeholder="Enter name" value="<?php if (isset($_POST['name'])) {echo $_POST['name'];}?>">
               </div>
               <div class="form-group">
                 <label for="email">Email address</label>
-                <input type="email" class="form-control" name="email" aria-describedby="emailHelp" placeholder="Enter email" value="<?php if(isset($_POST['email'])) { echo $_POST['email']; } ?>">
+                <input type="email" class="form-control" name="email" aria-describedby="emailHelp" placeholder="Enter email" value="<?php if (isset($_POST['email'])) {echo $_POST['email'];}?>">
               </div>
               <div class="form-group">
                 <label for="message">Message</label>
-                <input type="text" class="form-control" name="message" placeholder="Enter message" value="<?php if(isset($_POST['message'])) { echo $_POST['message']; } ?>">
+                <input type="text" class="form-control" name="message" placeholder="Enter message" value="<?php if (isset($_POST['message'])) {echo $_POST['message'];}?>">
               </div>
               <div class="form-group form-check">
                 <input type="checkbox" class="form-check-input">
@@ -106,5 +107,5 @@
           </div>
 
           <?php
-                include("templates/footer.php");
-          ?>
+include "templates/footer.php";
+?>

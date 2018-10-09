@@ -7,6 +7,8 @@
                   <li><a class="nav-link <?php if($page === 'home'): ?>active <?php endif; ?>" href="index.php">Home</a></li>
                   <li><a class="nav-link <?php if($page === 'about'): ?>active <?php endif; ?>" href="about.php">About</a></li>
                   <li><a class="nav-link <?php if($page === 'contact'): ?>active <?php endif; ?>" href="contact.php">Contact</a></li>
+                  <li><a class="nav-link <?php if($page === 'imageUpload'): ?>active <?php endif; ?>" href="imageUpload.php">Upload image</a></li>
+
                 </ul>
               </nav>
             </div>
