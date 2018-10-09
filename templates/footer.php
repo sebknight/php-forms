@@ -3,11 +3,8 @@
         <p>This is a footer. Nice one.</p>
     </div>
 </div>
-
         </div>
-
       </div>
-
     </div>
 
     <!-- Bootstrap core JavaScript

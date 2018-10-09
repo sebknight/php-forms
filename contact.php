@@ -52,7 +52,8 @@
   }
 
     $page = "contact";
-      include("templates/header.php");
+    require "templates/meta.php";
+    include("templates/header.php");
     ?>
     <div class="site-wrapper">
 
@@ -94,7 +95,7 @@
               </div>
               <div class="form-group">
                 <label for="message">Message</label>
-                <input type="text" class="form-control" name="message" placeholder="Enter message" value="<?php if(isset($_POST['message'])) { echo $_POST['message']; } ?>">>
+                <input type="text" class="form-control" name="message" placeholder="Enter message" value="<?php if(isset($_POST['message'])) { echo $_POST['message']; } ?>">
               </div>
               <div class="form-group form-check">
                 <input type="checkbox" class="form-check-input">
