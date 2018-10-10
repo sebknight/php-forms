@@ -1,3 +1,6 @@
+<?php
+    ob_start('ob_gzhandler('); //compress output
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>

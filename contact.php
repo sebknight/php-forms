@@ -102,7 +102,7 @@ if ($_POST && empty($errors)): ?>
                 <input type="checkbox" class="form-check-input">
                 <label for="subscribe" name="subscribe" class="form-check-label">Subscribe</label>
               </div>
-              <button type="submit" class="btn btn-primary">Submit</button>
+              <button type="submit" class="btn btn-default">Submit</button>
             </form>
           </div>
 

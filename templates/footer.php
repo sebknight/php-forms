@@ -17,3 +17,6 @@
     <!-- <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script> -->
   </body>
 </html>
+<?php
+  ob_end_flush(); // flush output buffer and send HTML to browser as a whole
+?>
